@@ -1,5 +1,32 @@
 # Changelog
 
+## v1.3.0 — 2026-08-26
+
+### Added
+- Six component best-practice references organized by Material purpose: Actions,
+  Communication, Containment, Navigation, Selection, and Text Input.
+- Per-component guidance for purpose, when to use, alternatives, behavior/content rules,
+  accessibility, anti-patterns, and M2↔M3 differences.
+- Coverage for buttons/icon buttons/FAB/segmented & split buttons; badges/progress/snackbar;
+  cards/dialogs/sheets/carousel/tooltips/lists; navigation bar/rail/drawer/app bars/tabs;
+  checkbox/radio/switch/chips/sliders/menus/pickers; text fields/search.
+- Ten additional evals (30 total) targeting component-selection semantics and version-aware
+  behavior, including Snackbar timing, adjacent text-field labels, adaptive navigation, card
+  actions, chip roles, SearchBar fit, Backdrop migration, and progress semantics.
+
+### Changed
+- Split the compact component catalog from detailed component-usage guidance so the Skill can
+  load only the relevant category instead of a single ever-growing reference.
+- Added a component-guidance discipline: Purpose → Use when → Alternatives → Best practices →
+  Anti-patterns → M2/M3 note → Accessibility.
+- Corrected TextField labeling guidance so placeholder-only labeling remains invalid while a
+  clear adjacent/independent label is not falsely rejected.
+- Softened Card interaction guidance: a primary card action can coexist with distinct
+  supplementary controls; overlapping/nested competing hit regions remain an anti-pattern.
+- Made Snackbar guidance explicitly version-aware instead of treating archived M2 timing as
+  a current universal rule.
+- Corrected determinate progress semantics from “known duration” to measurable progress.
+
 ## v1.2.0 — 2026-08-26
 
 ### Added

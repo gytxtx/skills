@@ -95,7 +95,13 @@ Load reference files on demand based on the task. Do not load all references pre
 | When the task involves... | Read |
 |---------------------------|------|
 | Color roles, dynamic color, dark theme, contrast, brand color mapping | `references/color-system.md` |
-| Selecting, auditing, or specifying Material components | `references/components.md` |
+| Component catalog, anatomy, state overview | `references/components.md` |
+| Buttons, icon buttons, FAB, segmented/split buttons | `references/components-actions.md` |
+| Badges, progress, snackbars, M2 banners | `references/components-communication.md` |
+| Cards, dialogs, sheets, carousel, tooltips, lists/dividers | `references/components-containment.md` |
+| Navigation bar/rail/drawer, app bars, tabs, adaptive navigation | `references/components-navigation.md` |
+| Checkbox, radio, switch, chips, sliders, menus, date/time pickers | `references/components-selection.md` |
+| Text fields and search | `references/components-text-input.md` |
 | Token naming, token layers, platform mappings, design-to-code handoff | `references/design-tokens.md` |
 | Platform-specific implementation after verifying current library version | `references/platform-guides.md` |
 | User explicitly requests Material 2, M2 theming, or legacy M2 maintenance | `references/material-2.md` |
@@ -116,6 +122,22 @@ Use words such as “must” only for true requirements (including accessibility
 constraints). Use “prefer”, “typically”, or “consider” for heuristics. Do not invent hard
 cutoffs such as “more than N items is forbidden” unless the component specification
 actually defines that range.
+
+### Component-guidance discipline
+
+For component-selection questions, load the relevant category reference and answer in this
+order when useful:
+
+1. **Purpose** — what job the component performs.
+2. **Use when** — conditions supported by the Material guidance.
+3. **Avoid / use an alternative when** — semantic mismatch, not stylistic preference.
+4. **Best practices** — content, hierarchy, behavior, layout, and applicable states.
+5. **Anti-patterns** — concrete misuse examples and the better alternative.
+6. **M2 ↔ M3 note** — only when behavior/name/availability materially differs.
+7. **Accessibility** — accessible name/state, focus/keyboard, touch target, error/status.
+
+Do not merge M2 and M3 rules into a fake cross-version rule. If M2 and current M3 differ
+(for example Snackbar timing/action behavior), label the version difference explicitly.
 
 ## Design workflow
 

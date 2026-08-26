@@ -120,6 +120,66 @@
       "prompt": "Our M3 Snackbar sometimes needs two short lines. A reviewer says Material allows exactly one line and must auto-dismiss in 4–10 seconds. Who is right?",
       "expected_output": "Should reject the hard-coded universal rule. M3 snackbars can accommodate short one- or two-line content depending on implementation; timing depends on platform APIs, message length, actionability and accessibility. Keep feedback brief and non-obscuring.",
       "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "I'm designing an M3 form. A reviewer says every TextField must have a floating label inside the field and an adjacent visible label is non-compliant. Is that true?",
+      "expected_output": "Reject the universal claim. Require a persistent visible/programmatic labeling mechanism and reject placeholder-only labeling. Note archived M2 explicitly allows a clear adjacent/independent label instead of an integrated label; verify current target component semantics rather than inventing a floating-label-only law.",
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "Our snackbar has an Undo action. Should we always dismiss it after 6 seconds because Material says snackbars last 4–10 seconds?",
+      "expected_output": "Distinguish versions. Explain the 4–10 second language comes from archived M2 guidance and must not be applied as a universal M3 rule. Current M3/Compose action snackbars need enough time and should not self-dismiss in a way that prevents the action; account for accessibility/platform timeout behavior.",
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "We have four top-level destinations on phones and the same app runs on tablets/desktops. What Material navigation components should we consider?",
+      "expected_output": "Recommend NavigationBar for compact layouts with 3–5 equal top-level destinations and NavigationRail for wider/tablet/desktop layouts where 3–7 main destinations stay persistent; consider a drawer when hierarchy broadens. Preserve destination taxonomy/state across adaptive forms and do not label rail as M3-only.",
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "Can I use a Card where the entire card opens details but it also contains a Favorite icon button and an overflow menu? Material says a card must be either fully clickable or contain clickable children, never both, right?",
+      "expected_output": "Reject that as an overly absolute rule. Cards can have a primary action region plus supplementary actions if hit regions, focus, semantics and state behavior are distinct. Warn against overlapping/nested competing interactive regions and keep actions related to the card subject.",
+      "files": []
+    },
+    {
+      "id": 25,
+      "prompt": "Which M3 chip should I use for contacts already entered in a To field, filters like Vegetarian, contextual help actions, and recommendations beneath an input?",
+      "expected_output": "Map by semantics: Input chip for user-provided contacts/tags, Filter chip for selectable refinements, Assist chip for contextual task assistance, Suggestion chip for recommendations. Do not map M2 Choice/Action chip names 1:1 by appearance.",
+      "files": []
+    },
+    {
+      "id": 26,
+      "prompt": "Search is only used occasionally in a settings screen. Should I place a large persistent Material 3 SearchBar at the top because that's the M3 search component?",
+      "expected_output": "Do not recommend SearchBar just because it exists. Current guidance recommends a persistent search bar when search is a primary focus. For occasional search, consider a less dominant app-bar action/contextual field appropriate to the flow; keep accessible naming and query state.",
+      "files": []
+    },
+    {
+      "id": 27,
+      "prompt": "My app has a binary notification preference that applies immediately, a one-of-three language choice, and multiple content filters. Which Material controls fit?",
+      "expected_output": "Use Switch for immediate binary preference, radio/segmented/menu depending visibility/space for one-of-three language, and checkboxes or FilterChips for independent multi-select filters. Explain semantics rather than choosing controls only by visual style.",
+      "files": []
+    },
+    {
+      "id": 28,
+      "prompt": "When should I use a dialog instead of a snackbar or bottom sheet for an important user flow?",
+      "expected_output": "Use Dialog for focused interruption when acknowledgement/input/decision is needed before safe continuation; Snackbar for brief non-blocking feedback; BottomSheet for richer contextual actions/content that benefit from preserving source context. Do not demand confirmation dialogs for every destructive action; use risk/reversibility/undo to decide.",
+      "files": []
+    },
+    {
+      "id": 29,
+      "prompt": "We're migrating an M2 Compose app using BackdropScaffold and ModalBottomSheetLayout to M3. What should we do?",
+      "expected_output": "State current Compose migration guidance: BackdropScaffold has no direct M3 equivalent and should be re-evaluated toward Scaffold or BottomSheetScaffold depending the task; ModalBottomSheetLayout maps toward ModalBottomSheet. Preserve interaction purpose rather than mechanically renaming APIs.",
+      "files": []
+    },
+    {
+      "id": 30,
+      "prompt": "I need a loading pattern. Is a circular indeterminate spinner always correct for network loading, and a linear indicator only for uploads?",
+      "expected_output": "Reject fixed semantic pairing by operation type. Choose determinate when real progress is known and indeterminate when completion fraction is unknown; linear vs circular depends on layout/context. Keep indicator near the process when useful, provide failure/retry state, and avoid fake percentages/endless blocking.",
+      "files": []
     }
   ]
 }

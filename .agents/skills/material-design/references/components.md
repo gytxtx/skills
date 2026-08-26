@@ -6,6 +6,12 @@ requires_current_verification: true
 
 # Material Design 3 — Component Reference
 
+> This file is the compact catalog/anatomy reference. For detailed version-aware usage,
+> when-to-use, alternatives, accessibility, and anti-patterns, load the matching category
+> reference: `components-actions.md`, `components-communication.md`,
+> `components-containment.md`, `components-navigation.md`, `components-selection.md`, or
+> `components-text-input.md`.
+
 ## Table of contents
 
 - [Buttons](#buttons)
@@ -110,11 +116,12 @@ platform defaults; preserve a visible focus indicator on keyboard-capable platfo
    usually a sign to use another action grouping pattern; treat this as a hierarchy
    heuristic rather than a universal numeric prohibition.
 2. Use for: compose email, create document, start recording, new task.
-3. Do NOT use for: delete, settings, filter, back, or any destructive/meta action.
-4. Position: bottom-end (bottom-right in LTR), 16dp from edges. Do not obscure critical
-   content or navigation.
-5. On scroll: FAB can hide to reveal content, reappear on scroll-up. Use a smooth
-   scale + fade transition.
+3. Destructive, navigation, overflow, and low-priority utility actions are generally poor
+   FAB candidates; use a control whose semantics match the job.
+4. Place the FAB according to the current component/layout spec and safe-area/inset rules;
+   do not obscure critical content or navigation.
+5. A FAB may respond to scrolling when that improves content visibility. Use the current
+   Material/platform motion behavior rather than prescribing one universal transition.
 6. FAB Menu / expressive action groups: keep the revealed action set small and scannable; verify the current component API rather than enforcing a fixed item count.
 
 ---
@@ -157,9 +164,12 @@ platform defaults; preserve a visible focus indicator on keyboard-capable platfo
 
 ### Text field rules
 
-1. **Always have a label** — do not use placeholder alone as the label.
-2. **Error text must explain how to fix the problem**, not just say "Invalid input."
-3. **Mark required fields** with an asterisk or "(required)" text.
+1. **Provide a persistent labeling mechanism** — do not use placeholder alone as the label.
+   M2 explicitly allows an adjacent/independent label instead of an integrated floating label.
+2. **Error text should identify the problem and, where useful, how to fix it**; color-only
+   error treatment is insufficient.
+3. **Communicate required/optional status consistently** using visible and programmatic
+   semantics appropriate to the form; an asterisk is one option, not a universal requirement.
 4. **Pre-format input where helpful** (auto-spacing credit card numbers, phone formatting)
    but never interfere with user typing or paste.
 5. **Choose validation timing by task.** Avoid noisy errors before the user can reasonably
@@ -194,7 +204,7 @@ platform defaults; preserve a visible focus indicator on keyboard-capable platfo
 
 | Type | Use | Behavior |
 |------|-----|----------|
-| **Assist Chip** | Suggested action or smart suggestion | Tappable, leads to action |
+| **Assist Chip** | Contextual assistance during a task | Tappable, triggers the assistance/action |
 | **Filter Chip** | Toggle filter state | Selectable, shows check when active |
 | **Input Chip** | Represent entered data (email recipients, tags) | Deletable via trailing icon |
 | **Suggestion Chip** | Present dynamic suggestions | Tappable, populates input |
@@ -204,8 +214,9 @@ platform defaults; preserve a visible focus indicator on keyboard-capable platfo
 1. Chips are compact — keep labels short enough to remain scannable; do not enforce a fixed word count when clarity needs more context.
 2. Filter chips must clearly indicate selected vs unselected state.
 3. Input chips need a clear delete/remove action.
-4. Don't nest chips; use a wrapping flow layout.
-5. Avoid mixing chip types in the same group.
+4. Avoid nested chip interaction. Use a layout that preserves clear individual hit targets.
+5. Group chips by a coherent semantic job. Mixing types can be valid when the relationship is
+   clear, but do not make visually similar chips behave unpredictably.
 
 ---
 
@@ -236,11 +247,13 @@ platform defaults; preserve a visible focus indicator on keyboard-capable platfo
 ### Card rules
 
 1. Cards group related content and actions. One card = one conceptual unit.
-2. The entire card can be tappable, or specific areas within it can be tappable —
-   not both, as this creates ambiguity.
-3. Keep card height and structure consistent within a list.
+2. A card may have a primary tappable region and supplementary actions, but keep their
+   hit regions and semantics distinct; avoid overlapping or nested interactive regions that
+   produce competing pressed/focus behavior.
+3. Keep repeated card structure consistent enough to support scanning and comparison.
 4. Don't overload a card with unrelated actions; move complex action sets to a menu, detail surface, or dedicated workflow.
-5. If the card itself is tappable, avoid nested interactive elements that compete.
+5. If the card itself is the primary action, make supplementary controls clearly secondary
+   and independently focusable where applicable.
 
 ---
 
@@ -408,6 +421,9 @@ These are layout classes, not mandatory component mappings. Re-evaluate at runti
    decision that should prevent missed feedback.
 5. Use a more persistent/interruptive pattern when the message requires sustained
    attention or blocks safe continuation.
+6. **Version note:** archived M2 guidance generally describes self-dismissing snackbars;
+   current M3 Compose guidance says a snackbar with an action should not time out/self-dismiss
+   before the user has a fair opportunity to act. Do not apply M2 timing as a universal M3 rule.
 
 ### Anatomy
 
@@ -423,10 +439,10 @@ These are layout classes, not mandatory component mappings. Re-evaluate at runti
 
 | Type | Use |
 |------|-----|
-| **Linear Determinate** | Progress with known duration (file upload, form steps) |
-| **Linear Indeterminate** | Unknown duration, ongoing (page loading, data fetching) |
-| **Circular Determinate** | Known duration, compact (task completion %) |
-| **Circular Indeterminate** | Unknown duration, compact (button loading, inline wait) |
+| **Linear Determinate** | Measurable progress (file upload, processing progress) |
+| **Linear Indeterminate** | Ongoing work where completion fraction is unknown |
+| **Circular Determinate** | Measurable progress in a compact region |
+| **Circular Indeterminate** | Ongoing work with unknown completion in a compact region |
 | **Loading Indicator** | Brief inline loading (M3 Expressive) |
 
 ### Rules
@@ -451,11 +467,13 @@ These are layout classes, not mandatory component mappings. Re-evaluate at runti
 
 ### Rules
 
-1. Tab labels should be short (1–2 words) and clearly descriptive.
-2. Active tab must be visually distinct (indicator line + text/icon color change).
+1. Keep tab labels concise and clearly descriptive; do not enforce a fixed word count.
+2. Selected state must be perceivable using the current component tokens/indicator treatment;
+   do not hard-code one indicator shape across Material generations.
 3. Tab content should be at the same hierarchy level.
-4. Swipe/drag between tabs is appropriate when tabs are paired with a pager/carousel pattern that supports it; do not add the gesture to every tab implementation by default.
-5. Don't use tabs as primary navigation if you already have bottom nav or nav rail.
+4. Swipe/drag between tabs is appropriate when tabs are paired with a pager pattern that supports it; do not add the gesture to every tab implementation by default.
+5. Tabs can coexist with global navigation when they organize a subordinate content region;
+   do not use them to duplicate the same top-level destinations.
 6. If tabs become difficult to scan, navigate, localize, or fit, reconsider the information architecture or use another navigation pattern; avoid a fixed numeric cutoff.
 
 ---
@@ -568,14 +586,16 @@ message, snackbar, dialog, or platform-specific banner alternative.
 
 - Browsing collections of images or cards.
 - Hero content showcases.
-- Onboarding flows.
+- Curated visual/content browsing where horizontal exploration is appropriate.
 
 ### Rules
 
-1. Clearly indicate that more items exist beyond the visible area (peek, arrows, dots).
-2. Support swipe/scroll gestures.
+1. Make additional content discoverable through the selected Material carousel strategy and
+   platform affordances; do not require one universal cue such as dots.
+2. Support the platform-appropriate scrolling, focus, and accessibility interaction model.
 3. Keep the collection navigable and performant; very large collections may need search, categories, pagination, or a different browsing pattern rather than a fixed item cutoff.
-4. Auto-advance only when appropriate (ambient content display); always provide pause.
+4. Avoid automatic movement for task-critical content. If content moves automatically, meet
+   applicable accessibility controls for pausing/stopping and sufficient reading time.
 
 ---
 
